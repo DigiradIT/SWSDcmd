@@ -20,7 +20,7 @@ func IncidentById(id string, key string) (*Incident, error) {
 	resp, err := client.R().
 		SetHeader("X-Samanage-Authorization", "Bearer "+key).
 		SetHeader("Accept", "application/json").
-		Get(query_url + id + ".json")
+		Get(query_url + "/" + id + ".json")
 
 	if err != nil {
 		fmt.Println("error fetching computer")
