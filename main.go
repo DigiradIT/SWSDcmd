@@ -38,7 +38,7 @@ func main() {
 		fmt.Println("category: string field that will be set to category.")
 		fmt.Println("subcategory: string field that will be set to subcategory.")
 		fmt.Println("computer: computer that will be attched to the incident.")
-		fmt.Println("incident: incident number that will be attached to incident.  9 digit number can be found in the URL of the incident immediately following /incidents/.")
+		fmt.Println("incidents: incident number that will be attached to incident.  9 digit number can be found in the URL of the incident immediately following /incidents/.")
 		return
 	}
 	if key == "" {
