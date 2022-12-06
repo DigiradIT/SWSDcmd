@@ -59,29 +59,43 @@ func TranslateFromCSV(in incidentcsv.Incident, key string) (Submission, error) {
 	sub.Category = Category{in.Category}
 	sub.Subcategory = Category{in.Subcategory}
 
-	computer, err := get.ComputerByName(in.Computer, key)
-
-	if err != nil {
-		return Submission{}, errors.New("Error fetching computer info.")
+	var computer *get.Comp
+	var err error
+	if in.Computer != "" {
+		computer, err = get.ComputerByName(in.Computer, key)
+		if err != nil {
+			return Submission{}, errors.New("Error fetching computer info.")
+		}
+	} else {
+		computer = nil
 	}
 
-	incident, err := get.IncidentById(in.Incidents, key)
+	var incident *get.Incident
+	err = nil
+	if in.Incidents != "" {
+		incident, err = get.IncidentById(in.Incidents, key)
 
-	if err != nil {
-		return Submission{}, errors.New("Error fetching incident info.")
+		if err != nil {
+			return Submission{}, errors.New("Error fetching incident info.")
+		}
+	} else {
+		incident = nil
+	}
+	if computer != nil {
+		sub.Assets = []Computer{{
+			Id:   computer.Id,
+			Href: computer.Href,
+		},
+		}
 	}
 
-	sub.Assets = []Computer{{
-		Id:   computer.Id,
-		Href: computer.Href,
-	},
-	}
-
-	sub.Incidents = []Incident{{
-		Id:     incident.Id,
-		Href:   incident.Href,
-		Number: incident.Number,
-	},
+	if incident != nil {
+		sub.Incidents = []Incident{{
+			Id:     incident.Id,
+			Href:   incident.Href,
+			Number: incident.Number,
+		},
+		}
 	}
 
 	return sub, nil

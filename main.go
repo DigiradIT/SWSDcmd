@@ -31,8 +31,8 @@ func main() {
 	if dispCSVFormat {
 		fmt.Println("Required headers: description,name,requester,assignee,category,subcategory,computer,incidents")
 		fmt.Println("")
-		fmt.Println("description: string field that describes incident.")
-		fmt.Println("name: string field that will be the title of the incident.")
+		fmt.Println("description (cannot be blank): string field that describes incident.")
+		fmt.Println("name (cannot be blank): string field that will be the title of the incident.")
 		fmt.Println("requester: email address (name@digirad.com) that will be set as requester.")
 		fmt.Println("assignee: email address (name@digirad.com) that will be set as assignee.")
 		fmt.Println("category: string field that will be set to category.")
